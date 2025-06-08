@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { openAIService } from '../services/openai.service';
+import { textAnalysisService } from '../services/text-analysis.service';
 import path from 'path';
 import fs from 'fs';
 
@@ -14,15 +15,25 @@ export const testTranscription = async (req: Request, res: Response) => {
       return res.status(404).json({ error: 'Audio file not found' });
     }
 
+    // Step 1: Transcribe the audio
+    console.log('Starting transcription...');
     const transcription = await openAIService.textToSpeech(audioPath);
     console.log('Transcription completed successfully!');
-    
-    // Send just the transcription text
-    res.send(transcription);
+
+    // Step 2: Analyze the transcribed text
+    console.log('Starting text analysis...');
+    const analysis = await textAnalysisService.analyzeMeetingText(transcription);
+    console.log('Analysis completed successfully!');
+
+    // Return both transcription and analysis
+    res.json({
+      transcription,
+      analysis
+    });
   } catch (error) {
     console.error('Error in testTranscription:', error);
     res.status(500).json({ 
-      error: 'Failed to transcribe audio',
+      error: 'Failed to process audio',
       details: error instanceof Error ? error.message : 'Unknown error'
     });
   }

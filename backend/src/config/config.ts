@@ -5,7 +5,7 @@ dotenv.config();
 export const config = {
   openai: {
     apiKey: process.env.OPENAI_API_KEY,
-    model: process.env.OPENAI_MODEL || 'gpt-4-turbo-preview',
+    model: 'gpt-4.1-nano',
   },
   server: {
     port: process.env.PORT || 3000,
