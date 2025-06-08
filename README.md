@@ -46,6 +46,9 @@
    - Next Steps
 4. **Results Display:** Insights are displayed in a clean, markdown-formatted interface
 
+![Capture-2025-06-08-154022](https://github.com/user-attachments/assets/c0242cc5-760f-4ad3-acfa-de880d70757c)
+
+
 ---
 
 ## 💻 Getting Started
